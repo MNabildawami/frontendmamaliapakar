@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Typography,
   Button,
@@ -19,6 +19,7 @@ import {
 
 // Definisikan tipe data untuk mamalia
 interface Mamalia {
+  
   Nama_Mamalia: string;
   Klasifikasi: string;
   Habitat: string;
@@ -32,6 +33,8 @@ interface Mamalia {
 // Tambahkan tipe data untuk hasil dengan akurasi
 interface MamaliaWithAccuracy extends Mamalia {
   Accuracy: number;
+  matchedAttributes: string[];  // Menambahkan matchedAttributes
+  matchDetails: string[];       // Menambahkfan matchDetails
 }
 
 const Home = () => {
@@ -94,6 +97,8 @@ const Home = () => {
       Tingkah_Laku: selectedTingkahLaku,
       Warna_Tubuh: selectedWarnaTubuh,
       Tempat_Tinggal: selectedTempatTinggal,
+      Nama_Mamalia: '',
+      Klasifikasi: ''
     };
 
     // Find matches
