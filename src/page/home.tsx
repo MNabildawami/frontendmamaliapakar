@@ -49,7 +49,6 @@ const Home = () => {
   const [transparencyLogs, setTransparencyLogs] = useState<string[]>([]); // To store logs for transparency
 
   const dataMamalia: Mamalia[] = [
-    // Data mamalia contoh
     {
       Nama_Mamalia: 'Lumba-lumba Hidung Botol',
       Klasifikasi: 'Mamalia',
@@ -80,8 +79,78 @@ const Home = () => {
       Warna_Tubuh: 'Abu-abu',
       Tempat_Tinggal: 'Darat',
     },
-    // ... (other mamalia data here)
+    {
+      Nama_Mamalia: 'Orangutan',
+      Klasifikasi: 'Mamalia',
+      Habitat: 'Hutan Hujan',
+      Jenis_Makanan: 'Omnivora',
+      Ciri_Bentuk_Tubuh: 'Kekar dengan Tangan Panjang',
+      Tingkah_Laku: 'Soliter',
+      Warna_Tubuh: 'Orange dengan Rambut Panjang',
+      Tempat_Tinggal: 'Darat',
+    },
+    {
+      Nama_Mamalia: 'Kelelawar Buah',
+      Klasifikasi: 'Mamalia',
+      Habitat: 'Hutan dan Area Terbuka',
+      Jenis_Makanan: 'Frugivora',
+      Ciri_Bentuk_Tubuh: 'Berbulu',
+      Tingkah_Laku: 'Nocturnal',
+      Warna_Tubuh: 'Hitam dengan Bercak Kuning',
+      Tempat_Tinggal: 'Darat',
+    },
+    {
+      Nama_Mamalia: 'Badak Jawa',
+      Klasifikasi: 'Mamalia',
+      Habitat: 'Hutan Bakau dan Hutan',
+      Jenis_Makanan: 'Herbivora',
+      Ciri_Bentuk_Tubuh: 'Besar dengan Kulit Kasar',
+      Tingkah_Laku: 'Soliter',
+      Warna_Tubuh: 'Abu-abu Kelabu',
+      Tempat_Tinggal: 'Darat',
+    },
+    {
+      Nama_Mamalia: 'Beruang Madu',
+      Klasifikasi: 'Mamalia',
+      Habitat: 'Hutan Hujan',
+      Jenis_Makanan: 'Omnivora',
+      Ciri_Bentuk_Tubuh: 'Tegap dengan Cakar Panjang',
+      Tingkah_Laku: 'Soliter',
+      Warna_Tubuh: 'Hitam dengan Cincin Kuning',
+      Tempat_Tinggal: 'Darat',
+    },
+    {
+      Nama_Mamalia: 'Rusa Timor',
+      Klasifikasi: 'Mamalia',
+      Habitat: 'Hutan dan Padang Rumput',
+      Jenis_Makanan: 'Herbivora',
+      Ciri_Bentuk_Tubuh: 'Cepat dengan Tanduk',
+      Tingkah_Laku: 'Nocturnal',
+      Warna_Tubuh: 'Coklat Pudar dengan Putih di Perut',
+      Tempat_Tinggal: 'Darat',
+    },
+    {
+      Nama_Mamalia: 'Trenggiling Jawa',
+      Klasifikasi: 'Mamalia',
+      Habitat: 'Hutan dan Area Terbuka',
+      Jenis_Makanan: 'Insektofag',
+      Ciri_Bentuk_Tubuh: 'Kecil dengan Bulu Perisai',
+      Tingkah_Laku: 'Nocturnal',
+      Warna_Tubuh: 'Berlian Coklat',
+      Tempat_Tinggal: 'Darat',
+    },
+    {
+      Nama_Mamalia: 'Kuskus',
+      Klasifikasi: 'Mamalia',
+      Habitat: 'Hutan dan Area Bervegetasi',
+      Jenis_Makanan: 'Herbivora',
+      Ciri_Bentuk_Tubuh: 'Kecil dengan Ekor Panjang',
+      Tingkah_Laku: 'Soliter',
+      Warna_Tubuh: 'Abu-abu Coklat',
+      Tempat_Tinggal: 'Darat',
+    },
   ];
+  
 
   const handleSearch = (): void => {
     if (!selectedHabitat || !selectedCiriTubuh || !selectedJenisMakanan || !selectedTingkahLaku || !selectedWarnaTubuh || !selectedTempatTinggal) {
