@@ -1,0 +1,159 @@
+/* Mengatur container utama */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f4f7fa; /* Warna latar belakang yang lebih lembut */
+  border-radius: 10px; /* Memberikan radius pada sudut */
+}
+
+/* Menata logo */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms, transform 300ms;
+  display: inline-block;
+  margin-bottom: 1.5em;
+  border-radius: 50%; /* Membuat logo berbentuk bulat */
+  background-color: #fff; /* Warna latar belakang logo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Memberikan bayangan lembut pada logo */
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+  transform: scale(1.1); /* Membesarkan logo saat hover */
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Animasi untuk logo */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Menata card */
+.card {
+  padding: 2em;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Menata link */
+.read-the-docs {
+  color: #888;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.read-the-docs:hover {
+  color: #646cff;
+}
+
+/* Responsivitas untuk layar kecil */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 4em;
+    padding: 1em;
+  }
+
+  .card {
+    padding: 1.5em;
+  }
+
+  .read-the-docs {
+    font-size: 1rem;
+  }
+}
+
+/* Responsivitas untuk layar sangat kecil (seperti smartphone) */
+@media (max-width: 480px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 3em;
+    padding: 0.8em;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .read-the-docs {
+    font-size: 0.9rem;
+  }
+}
+
+.App {
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.search-button {
+  display: block;
+  margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+  .filter-section {
+    display: block;
+  }
+
+  .MuiFormControl-root {
+    margin-bottom: 15px;
+  }
+
+  .MuiButton-root {
+    width: 100%;
+  }
+
+  .table-container {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    font-size: 12px;
+  }
+}
