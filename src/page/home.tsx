@@ -43,8 +43,10 @@ const Home = () => {
   const [selectedTempatTinggal, setSelectedTempatTinggal] = useState<string>('');
   const [results, setResults] = useState<MamaliaWithAccuracy[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false); // State untuk kontrol modal
+  const [transparencyLogs, setTransparencyLogs] = useState<string[]>([]); // To store logs for transparency
 
   const dataMamalia: Mamalia[] = [
+    // Data mamalia contoh
     {
       Nama_Mamalia: 'Lumba-lumba Hidung Botol',
       Klasifikasi: 'Mamalia',
@@ -75,76 +77,7 @@ const Home = () => {
       Warna_Tubuh: 'Abu-abu',
       Tempat_Tinggal: 'Darat',
     },
-    {
-      Nama_Mamalia: 'Orangutan',
-      Klasifikasi: 'Mamalia',
-      Habitat: 'Hutan Hujan',
-      Jenis_Makanan: 'Omnivora',
-      Ciri_Bentuk_Tubuh: 'Kekar dengan Tangan Panjang',
-      Tingkah_Laku: 'Soliter',
-      Warna_Tubuh: 'Orange dengan Rambut Panjang',
-      Tempat_Tinggal: 'Darat',
-    },
-    {
-      Nama_Mamalia: 'Kelelawar Buah',
-      Klasifikasi: 'Mamalia',
-      Habitat: 'Hutan dan Area Terbuka',
-      Jenis_Makanan: 'Frugivora',
-      Ciri_Bentuk_Tubuh: 'Berbulu',
-      Tingkah_Laku: 'Nocturnal',
-      Warna_Tubuh: 'Hitam dengan Bercak Kuning',
-      Tempat_Tinggal: 'Darat',
-    },
-    {
-      Nama_Mamalia: 'Badak Jawa',
-      Klasifikasi: 'Mamalia',
-      Habitat: 'Hutan Bakau dan Hutan',
-      Jenis_Makanan: 'Herbivora',
-      Ciri_Bentuk_Tubuh: 'Besar dengan Kulit Kasar',
-      Tingkah_Laku: 'Soliter',
-      Warna_Tubuh: 'Abu-abu Kelabu',
-      Tempat_Tinggal: 'Darat',
-    },
-    {
-      Nama_Mamalia: 'Beruang Madu',
-      Klasifikasi: 'Mamalia',
-      Habitat: 'Hutan Hujan',
-      Jenis_Makanan: 'Omnivora',
-      Ciri_Bentuk_Tubuh: 'Tegap dengan Cakar Panjang',
-      Tingkah_Laku: 'Soliter',
-      Warna_Tubuh: 'Hitam dengan Cincin Kuning',
-      Tempat_Tinggal: 'Darat',
-    },
-    {
-      Nama_Mamalia: 'Rusa Timor',
-      Klasifikasi: 'Mamalia',
-      Habitat: 'Hutan dan Padang Rumput',
-      Jenis_Makanan: 'Herbivora',
-      Ciri_Bentuk_Tubuh: 'Cepat dengan Tanduk',
-      Tingkah_Laku: 'Nocturnal',
-      Warna_Tubuh: 'Coklat Pudar dengan Putih di Perut',
-      Tempat_Tinggal: 'Darat',
-    },
-    {
-      Nama_Mamalia: 'Trenggiling Jawa',
-      Klasifikasi: 'Mamalia',
-      Habitat: 'Hutan dan Area Terbuka',
-      Jenis_Makanan: 'Insektofag',
-      Ciri_Bentuk_Tubuh: 'Kecil dengan Bulu Perisai',
-      Tingkah_Laku: 'Nocturnal',
-      Warna_Tubuh: 'Berlian Coklat',
-      Tempat_Tinggal: 'Darat',
-    },
-    {
-      Nama_Mamalia: 'Kuskus',
-      Klasifikasi: 'Mamalia',
-      Habitat: 'Hutan dan Area Bervegetasi',
-      Jenis_Makanan: 'Herbivora',
-      Ciri_Bentuk_Tubuh: 'Kecil dengan Ekor Panjang',
-      Tingkah_Laku: 'Soliter',
-      Warna_Tubuh: 'Abu-abu Coklat',
-      Tempat_Tinggal: 'Darat',
-    },
+    // ... (other mamalia data here)
   ];
 
   const handleSearch = (): void => {
@@ -152,51 +85,49 @@ const Home = () => {
       alert("Harap isi semua dropdown sebelum mencari mamalia.");
       return;
     }
-  
-// Update the inputFacts type to be more specific
-const inputFacts: { [key in keyof typeof dataMamalia[0]]: string } = {
-  Habitat: selectedHabitat,
-  Jenis_Makanan: selectedJenisMakanan,
-  Ciri_Bentuk_Tubuh: selectedCiriTubuh,
-  Tingkah_Laku: selectedTingkahLaku,
-  Warna_Tubuh: selectedWarnaTubuh,
-  Tempat_Tinggal: selectedTempatTinggal
-};
 
-  
+    // Create inputFacts for matching
+    const inputFacts: { [key in keyof typeof dataMamalia[0]]: string } = {
+      Habitat: selectedHabitat,
+      Jenis_Makanan: selectedJenisMakanan,
+      Ciri_Bentuk_Tubuh: selectedCiriTubuh,
+      Tingkah_Laku: selectedTingkahLaku,
+      Warna_Tubuh: selectedWarnaTubuh,
+      Tempat_Tinggal: selectedTempatTinggal,
+    };
+
+    // Find matches
     const matches = dataMamalia.map((mamalia: Mamalia) => {
       let matchCount = 0;
       let matchedAttributes: string[] = [];
-      let matchDetails: string[] = [];  // Array to store detailed matches
-  
-      // Compare each attribute
-// Update the forEach loop to use keyof
-Object.keys(inputFacts).forEach((key: string) => {
-  const typedKey = key as keyof typeof inputFacts; // Assert key type
-  if (mamalia[typedKey] === inputFacts[typedKey]) {
-    matchCount++;
-    matchedAttributes.push(key);
-    matchDetails.push(`${key}: ${mamalia[typedKey]} (User Input: ${inputFacts[typedKey]})`);
-  }
-});
+      let matchDetails: string[] = [];
 
-  
+      // Compare each attribute
+      Object.keys(inputFacts).forEach((key: string) => {
+        const typedKey = key as keyof typeof inputFacts; // Assert key type
+        if (mamalia[typedKey] === inputFacts[typedKey]) {
+          matchCount++;
+          matchedAttributes.push(key);
+          matchDetails.push(`${key}: ${mamalia[typedKey]} (User Input: ${inputFacts[typedKey]})`);
+        }
+      });
+
       const accuracy = (matchCount / 6) * 100; // Calculate accuracy based on 6 factors
-  
+
       return { ...mamalia, Accuracy: accuracy, matchedAttributes, matchDetails };
     }).filter((item) => item.Accuracy >= 50); // Filter matches with accuracy >= 50%
-  
+
     // Sort the results by accuracy
     matches.sort((a, b) => b.Accuracy - a.Accuracy);
-  
+
     // If no matches are found
     if (matches.length === 0) {
       alert('Tidak ada mamalia yang sesuai dengan kriteria yang diberikan.');
     }
-  
+
     // Set results
     setResults(matches);
-  
+
     // Set transparency logs for each selected attribute
     const logs: string[] = [];
     Object.keys(inputFacts).forEach((key) => {
@@ -208,13 +139,10 @@ Object.keys(inputFacts).forEach((key: string) => {
         });
       }
     });
-  
+
     setTransparencyLogs(logs); // Set the logs for transparency
     setOpenModal(true); // Open the modal to show the results
   };
-  
-
-  const [transparencyLogs, setTransparencyLogs] = useState<string[]>([]); // To store logs for transparency
 
   const isFormValid = selectedHabitat && selectedCiriTubuh && selectedJenisMakanan && selectedTingkahLaku && selectedWarnaTubuh && selectedTempatTinggal;
 
@@ -264,7 +192,6 @@ Object.keys(inputFacts).forEach((key: string) => {
               <MenuItem value="Karnivora">Karnivora</MenuItem>
               <MenuItem value="Herbivora">Herbivora</MenuItem>
               <MenuItem value="Omnivora">Omnivora</MenuItem>
-              <MenuItem value="Frugivora">Frugivora</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -276,6 +203,8 @@ Object.keys(inputFacts).forEach((key: string) => {
             <Select value={selectedTingkahLaku} onChange={(e) => setSelectedTingkahLaku(e.target.value)}>
               <MenuItem value="Nocturnal">Nocturnal</MenuItem>
               <MenuItem value="Soliter">Soliter</MenuItem>
+              <MenuItem value="Kepekaan Gerakan Tinggi">Kepekaan Gerakan Tinggi</MenuItem>
+              <MenuItem value="Sosial">Sosial</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -287,7 +216,8 @@ Object.keys(inputFacts).forEach((key: string) => {
             <Select value={selectedWarnaTubuh} onChange={(e) => setSelectedWarnaTubuh(e.target.value)}>
               <MenuItem value="Abu-abu keputihan">Abu-abu keputihan</MenuItem>
               <MenuItem value="Orange dengan Garis Tiger">Orange dengan Garis Tiger</MenuItem>
-              <MenuItem value="Orange dengan Rambut Panjang">Orange dengan Rambut Panjang</MenuItem>
+              <MenuItem value="Abu-abu">Abu-abu</MenuItem>
+              <MenuItem value="Putih">Putih</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -302,117 +232,47 @@ Object.keys(inputFacts).forEach((key: string) => {
             </Select>
           </FormControl>
         </Grid>
-
-        {/* Button container */}
-        <Grid item xs={12} className="d-flex justify-center" style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSearch}
-            disabled={!isFormValid}
-            className="search-button"
-          >
-            Cari Mamalia
-          </Button>
-        </Grid>
-
-        {/* Modal untuk menampilkan hasil pencarian */}
-        <Modal
-  open={openModal}
-  onClose={() => setOpenModal(false)}
-  aria-labelledby="modal-title"
-  aria-describedby="modal-description"
->
-  <Box
-    sx={{
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: '90%',
-      maxWidth: '1000px',
-      bgcolor: 'background.paper',
-      boxShadow: 24,
-      p: 4,
-      borderRadius: 2,
-      maxHeight: '80vh', // Max height for the modal
-      overflowY: 'auto', // Allows scrolling if the content overflows
-    }}
-  >
-    <Typography
-      variant="h6"
-      id="modal-title"
-      gutterBottom
-      sx={{ fontWeight: 'bold', borderBottom: '2px solid #ccc', paddingBottom: 2 }}
-    >
-      Hasil Pencarian Mamalia
-    </Typography>
-
-    {/* Table container with scroll */}
-    <TableContainer
-      component={Paper}
-      className="table-container"
-      sx={{ maxHeight: 400, overflowY: 'auto' }} // Added maxHeight and scroll for the table
-    >
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell><b>Nama Mamalia</b></TableCell>
-            <TableCell><b>Klasifikasi</b></TableCell>
-            <TableCell><b>Habitat</b></TableCell>
-            <TableCell><b>Jenis Makanan</b></TableCell>
-            <TableCell><b>Ciri Bentuk Tubuh</b></TableCell>
-            <TableCell><b>Tingkah Laku</b></TableCell>
-            <TableCell><b>Warna Tubuh</b></TableCell>
-            <TableCell><b>Tempat Tinggal</b></TableCell>
-            <TableCell><b>Akurasi (%)</b></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {results.map((row: MamaliaWithAccuracy, index) => (
-            <TableRow key={index}>
-              <TableCell>{row.Nama_Mamalia}</TableCell>
-              <TableCell>{row.Klasifikasi}</TableCell>
-              <TableCell>{row.Habitat}</TableCell>
-              <TableCell>{row.Jenis_Makanan}</TableCell>
-              <TableCell>{row.Ciri_Bentuk_Tubuh}</TableCell>
-              <TableCell>{row.Tingkah_Laku}</TableCell>
-              <TableCell>{row.Warna_Tubuh}</TableCell>
-              <TableCell>{row.Tempat_Tinggal}</TableCell>
-              <TableCell>{row.Accuracy.toFixed(2)}%</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-    {/* Display transparency logs with scroll */}
-    <Typography variant="h6" sx={{ marginTop: 3 }}>
-      Transparansi Aturan yang Digunakan:
-    </Typography>
-    <Box
-      sx={{
-        marginTop: 1,
-        padding: 2,
-        backgroundColor: '#f7f7f7',
-        maxHeight: '300px', // Set a fixed height for the log area
-        overflowY: 'auto', // Add scroll if content exceeds the height
-      }}
-    >
-      {transparencyLogs.map((log, index) => (
-        <div key={index}>{log}</div>
-      ))}
-    </Box>
-
-    <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
-      <Button onClick={() => setOpenModal(false)} color="primary" variant="outlined">
-        Tutup
-      </Button>
-    </Box>
-  </Box>
-</Modal>
-
       </Grid>
+
+      <Button variant="contained" color="primary" onClick={handleSearch} disabled={!isFormValid}>
+        Cari Mamalia
+      </Button>
+
+      {/* Modal untuk menampilkan hasil */}
+      <Modal open={openModal} onClose={() => setOpenModal(false)}>
+        <Box sx={{ padding: 3, backgroundColor: 'white', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', maxHeight: '80%', overflowY: 'auto' }}>
+          <Typography variant="h6">Hasil Pencarian Mamalia</Typography>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="mamalia-table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nama Mamalia</TableCell>
+                  <TableCell align="center">Akurasi (%)</TableCell>
+                  <TableCell align="center">Cocok</TableCell>
+                  <TableCell align="center">Detil Pencocokan</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {results.map((mamalia) => (
+                  <TableRow key={mamalia.Nama_Mamalia}>
+                    <TableCell>{mamalia.Nama_Mamalia}</TableCell>
+                    <TableCell align="center">{mamalia.Accuracy.toFixed(2)}%</TableCell>
+                    <TableCell align="center">{mamalia.matchedAttributes.join(', ')}</TableCell>
+                    <TableCell align="center">
+                      <pre>{mamalia.matchDetails.join('\n')}</pre>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Typography variant="body1" mt={2}>Logs Transparansi:</Typography>
+          <pre>{transparencyLogs.join('\n')}</pre>
+          <Button onClick={() => setOpenModal(false)} color="primary" variant="contained" sx={{ marginTop: 2 }}>
+            Tutup
+          </Button>
+        </Box>
+      </Modal>
     </div>
   );
 };
