@@ -109,7 +109,7 @@ const Home = () => {
 
       // Compare each attribute
       Object.keys(inputFacts).forEach((key: string) => {
-        const typedKey = key as keyof typeof inputFacts; // Assert key type
+        const typedKey = key as keyof Mamalia; // Assert key type
         if (mamalia[typedKey] === inputFacts[typedKey]) {
           matchCount++;
           matchedAttributes.push(key);
@@ -133,17 +133,21 @@ const Home = () => {
     // Set results
     setResults(matches);
 
-    // Set transparency logs for each selected attribute
-    const logs: string[] = [];
-    Object.keys(inputFacts).forEach((key) => {
-      const filteredResults = matches.filter((m) => m[key as keyof Mamalia] === inputFacts[key as keyof typeof inputFacts]);
-      if (filteredResults.length > 0) {
-        logs.push(`\nMatches for ${key}: ${inputFacts[key]}`);
-        filteredResults.forEach((mamalia) => {
-          logs.push(`  - ${mamalia.Nama_Mamalia}: ${mamalia[key as keyof Mamalia]}`);
-        });
-      }
+// Set transparency logs for each selected attribute
+const logs: string[] = [];
+Object.keys(inputFacts).forEach((key) => {
+  // Assert 'key' as a valid keyof Mamalia
+  const typedKey = key as keyof Mamalia;
+
+  const filteredResults = matches.filter((m) => m[typedKey] === inputFacts[typedKey]);
+  if (filteredResults.length > 0) {
+    logs.push(`\nMatches for ${key}: ${inputFacts[key as keyof typeof inputFacts]}`);
+    filteredResults.forEach((mamalia) => {
+      logs.push(`  - ${mamalia.Nama_Mamalia}: ${mamalia[typedKey]}`);
     });
+  }
+});
+
 
     setTransparencyLogs(logs); // Set the logs for transparency
     setOpenModal(true); // Open the modal to show the results
