@@ -6,6 +6,10 @@
   text-align: center;
   background-color: #f4f7fa; /* Warna latar belakang yang lebih lembut */
   border-radius: 10px; /* Memberikan radius pada sudut */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Mengatur tinggi root container untuk posisi vertikal di tengah */
 }
 
 /* Menata logo */
@@ -19,6 +23,8 @@
   border-radius: 50%; /* Membuat logo berbentuk bulat */
   background-color: #fff; /* Warna latar belakang logo */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Memberikan bayangan lembut pada logo */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .logo:hover {
@@ -54,6 +60,9 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
   transition: transform 300ms ease, box-shadow 300ms ease;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto; /* Menjaga card tetap di tengah */
 }
 
 .card:hover {
@@ -119,6 +128,7 @@
 
 .title {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .filter-section {
@@ -134,6 +144,7 @@
   margin: 20px auto;
 }
 
+/* Responsivitas untuk filter dan tabel */
 @media (max-width: 768px) {
   .filter-section {
     display: block;
