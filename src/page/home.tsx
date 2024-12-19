@@ -281,8 +281,6 @@ Object.keys(inputFacts).forEach((key) => {
             <Select value={selectedTingkahLaku} onChange={(e) => setSelectedTingkahLaku(e.target.value)}>
               <MenuItem value="Nocturnal">Nocturnal</MenuItem>
               <MenuItem value="Soliter">Soliter</MenuItem>
-              <MenuItem value="Kepekaan Gerakan Tinggi">Kepekaan Gerakan Tinggi</MenuItem>
-              <MenuItem value="Sosial">Sosial</MenuItem>
             </Select>
           </FormControl>
         </Grid>
