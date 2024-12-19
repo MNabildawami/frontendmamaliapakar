@@ -33,8 +33,17 @@ interface Mamalia {
 // Tambahkan tipe data untuk hasil dengan akurasi
 interface MamaliaWithAccuracy extends Mamalia {
   Accuracy: number;
-  matchedAttributes: string[];  // Menambahkan matchedAttributes
-  matchDetails: string[];       // Menambahkfan matchDetails
+  matchedAttributes: string[];
+  matchDetails: string[];
+  Nama_Mamalia: string;
+  Klasifikasi: string;
+  Habitat: string;
+  Jenis_Makanan: string;
+  Ciri_Bentuk_Tubuh: string;
+  Tingkah_Laku: string;
+  Warna_Tubuh: string;
+  Tempat_Tinggal: string;
+  characteristics?: string[];  // Menambahkan 'characteristics' sebagai properti opsional
 }
 
 const Home = () => {
@@ -316,39 +325,94 @@ Object.keys(inputFacts).forEach((key) => {
 
       {/* Modal untuk menampilkan hasil */}
       <Modal open={openModal} onClose={() => setOpenModal(false)}>
-        <Box sx={{ padding: 3, backgroundColor: 'white', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80%', maxHeight: '80%', overflowY: 'auto' }}>
-          <Typography variant="h6">Hasil Pencarian Mamalia</Typography>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="mamalia-table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Nama Mamalia</TableCell>
-                  <TableCell align="center">Akurasi (%)</TableCell>
-                  <TableCell align="center">Cocok</TableCell>
-                  <TableCell align="center">Detil Pencocokan</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {results.map((mamalia) => (
-                  <TableRow key={mamalia.Nama_Mamalia}>
-                    <TableCell>{mamalia.Nama_Mamalia}</TableCell>
-                    <TableCell align="center">{mamalia.Accuracy.toFixed(2)}%</TableCell>
-                    <TableCell align="center">{mamalia.matchedAttributes.join(', ')}</TableCell>
-                    <TableCell align="center">
-                      <pre>{mamalia.matchDetails.join('\n')}</pre>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Typography variant="body1" mt={2}>Logs Transparansi:</Typography>
-          <pre>{transparencyLogs.join('\n')}</pre>
-          <Button onClick={() => setOpenModal(false)} color="primary" variant="contained" sx={{ marginTop: 2 }}>
-            Tutup
-          </Button>
-        </Box>
-      </Modal>
+  <Box sx={{
+    padding: 3,
+    backgroundColor: 'white',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    maxHeight: '80%',
+    overflowY: 'auto',
+    borderRadius: '8px',
+    boxShadow: 24,
+  }}>
+    <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: 'bold', color: 'primary.main' }}>
+      Hasil Pencarian Mamalia
+    </Typography>
+
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="mamalia-table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: 'bold' }}>Nama Mamalia</TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Akurasi (%)</TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Cocok</TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Ciri-Ciri Hewan</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {results.map((mamalia) => (
+            <TableRow key={mamalia.Nama_Mamalia}>
+              <TableCell>{mamalia.Nama_Mamalia}</TableCell>
+              <TableCell align="center">{mamalia.Accuracy.toFixed(2)}%</TableCell>
+              <TableCell align="center">{mamalia.matchedAttributes.join(', ')}</TableCell>
+              <TableCell align="center">
+                <Box sx={{
+                  padding: '12px',
+                  backgroundColor: '#f4f4f4',
+                  borderRadius: '4px',
+                  maxHeight: '200px',
+                  overflowY: 'auto',
+                  textAlign: 'left',  // Menyusun teks rata kiri
+                  whiteSpace: 'pre-line', // Mempertahankan spasi baris baru
+                  wordBreak: 'break-word', // Menyusun kata yang terputus di akhir baris
+                  fontFamily: 'monospace', // Memberikan gaya font monospaced
+                  fontSize: '0.875rem', // Ukuran font sedikit lebih kecil agar lebih mudah dibaca
+                }}>
+                  <strong>Habitat:</strong> {mamalia.Habitat}<br />
+                  <strong>Jenis Makanan:</strong> {mamalia.Jenis_Makanan}<br />
+                  <strong>Ciri Bentuk Tubuh:</strong> {mamalia.Ciri_Bentuk_Tubuh}<br />
+                  <strong>Tingkah Laku:</strong> {mamalia.Tingkah_Laku}<br />
+                  <strong>Warna Tubuh:</strong> {mamalia.Warna_Tubuh}<br />
+                  <strong>Tempat Tinggal:</strong> {mamalia.Tempat_Tinggal}<br />
+                </Box>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+    <Typography variant="body1" mt={2} sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+      Logs Transparansi:
+    </Typography>
+    <Box sx={{
+      marginTop: 1,
+      padding: '12px',
+      backgroundColor: '#f4f4f4',
+      borderRadius: '4px',
+      maxHeight: '200px',
+      overflowY: 'auto',
+      textAlign: 'left',  // Menyusun teks rata kiri
+      whiteSpace: 'pre-line', // Mempertahankan spasi baris baru
+      wordBreak: 'break-word', // Menyusun kata yang terputus di akhir baris
+      fontFamily: 'monospace',
+      fontSize: '0.875rem', // Ukuran font sedikit lebih kecil agar lebih mudah dibaca
+    }}>
+      {transparencyLogs.join('\n')}
+    </Box>
+
+    <Button onClick={() => setOpenModal(false)} color="primary" variant="contained" sx={{ marginTop: 2 }}>
+      Tutup
+    </Button>
+  </Box>
+</Modal>
+
+
+
+
     </div>
   );
 };
