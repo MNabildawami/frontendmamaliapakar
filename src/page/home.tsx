@@ -303,6 +303,7 @@ Object.keys(inputFacts).forEach((key) => {
               <MenuItem value="Orange dengan Garis Tiger">Orange dengan Garis Tiger</MenuItem>
               <MenuItem value="Abu-abu">Abu-abu</MenuItem>
               <MenuItem value="Putih">Putih</MenuItem>
+              <MenuItem value="Putih">Orange dengan Rambut Panjang</MenuItem>
             </Select>
           </FormControl>
         </Grid>
