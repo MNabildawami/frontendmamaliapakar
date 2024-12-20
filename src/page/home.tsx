@@ -266,6 +266,11 @@ Object.keys(inputFacts).forEach((key) => {
               <MenuItem value="Besar dengan Belalai">Besar dengan Belalai</MenuItem>
               <MenuItem value="Kekar dengan Tangan Panjang">Kekar dengan Tangan Panjang</MenuItem>
               <MenuItem value="Berbulu">Berbulu</MenuItem>
+              <MenuItem value="Orange dengan Rambut Panjang">Orange dengan Rambut Panjang</MenuItem>
+              <MenuItem value="Tegap dengan Cakar Panjang">Tegap dengan Cakar Panjang</MenuItem>
+              <MenuItem value="Cepat dengan Tanduk">Cepat dengan Tanduk</MenuItem>
+              <MenuItem value="Kecil dengan Bulu Perisai">Kecil dengan Bulu Perisai</MenuItem>
+              <MenuItem value="Kecil dengan Ekor Panjang">Kecil dengan Ekor Panjang</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -278,6 +283,8 @@ Object.keys(inputFacts).forEach((key) => {
               <MenuItem value="Plankton dan Ikan">Plankton dan Ikan</MenuItem>
               <MenuItem value="Karnivora">Karnivora</MenuItem>
               <MenuItem value="Herbivora">Herbivora</MenuItem>
+              <MenuItem value="Frugivora">Frugivora</MenuItem>
+              <MenuItem value="Insektofag">Insektofag</MenuItem>
               <MenuItem value="Omnivora">Omnivora</MenuItem>
             </Select>
           </FormControl>
@@ -290,6 +297,7 @@ Object.keys(inputFacts).forEach((key) => {
             <Select value={selectedTingkahLaku} onChange={(e) => setSelectedTingkahLaku(e.target.value)}>
               <MenuItem value="Nocturnal">Nocturnal</MenuItem>
               <MenuItem value="Soliter">Soliter</MenuItem>
+              <MenuItem value="Kepekaan Gerakan Tinggi">Kepekaan Gerakan Tinggi</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -302,8 +310,14 @@ Object.keys(inputFacts).forEach((key) => {
               <MenuItem value="Abu-abu keputihan">Abu-abu keputihan</MenuItem>
               <MenuItem value="Orange dengan Garis Tiger">Orange dengan Garis Tiger</MenuItem>
               <MenuItem value="Abu-abu">Abu-abu</MenuItem>
-              <MenuItem value="Putih">Putih</MenuItem>
-              <MenuItem value="Putih">Orange dengan Rambut Panjang</MenuItem>
+              <MenuItem value="Orange dengan Rambut Panjang">Orange dengan Rambut Panjang</MenuItem>
+              <MenuItem value="Hitam dengan Bercak Kuning">Hitam dengan Bercak Kuning</MenuItem>
+              <MenuItem value="Abu-abu Kelabu">Abu-abu Kelabu</MenuItem>
+              <MenuItem value="Hitam dengan Cincin Kuning">Hitam dengan Cincin Kuning</MenuItem>
+              <MenuItem value="Coklat Pudar dengan Putih di Perut">Coklat Pudar dengan Putih di Perut</MenuItem>
+              <MenuItem value="Berlian Coklat">Berlian Coklat</MenuItem>
+              <MenuItem value="Abu-abu Coklat">Abu-abu Coklat</MenuItem>
+              
             </Select>
           </FormControl>
         </Grid>
